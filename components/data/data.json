@@ -1,0 +1,81 @@
+[
+    {
+        "_id" : "7c107200-af92-11ea-84a5-375d38ce727a",
+        "node" : "Node1",
+        "timer1" : "18,45",
+        "timer2" : "11,54",
+        "timer3" : "12,88",
+        "thresholdTemperature" : "09,65",
+        "thresholdHumidity" : "10,41",
+        "auto" : false,
+        "dew" : true,
+        "fan" : true,
+        "pump1" : false,
+        "pump2" : false,
+        "pump3" : true
+    },
+
+    {
+        "_id" : "7a9dcf30-af92-11ea-84a5-375d38ce727a",
+        "node" : "Node2",
+        "timer1" : "16.57",
+        "timer2" : "48,56",
+        "timer3" : "22,54",
+        "thresholdTemperature" : "44,54",
+        "thresholdHumidity" : "61,85",
+        "auto" : false,
+        "dew" : false,
+        "fan" : false,
+        "pump1" : true,
+        "pump2" : false,
+        "pump3" : false
+    },
+
+    {
+        "_id" : "790ccef0-af92-11ea-84a5-375d38ce727a",
+        "node" : "Node3",
+        "timer1" : "00,00",
+        "timer2" : "00,00",
+        "timer3" : "00,00",
+        "thresholdTemperature" : "00,00",
+        "thresholdHumidity" : "00,00",
+        "auto" : true,
+        "dew" : false,
+        "fan" : false,
+        "pump1" : true,
+        "pump2" : false,
+        "pump3" : false
+    },
+
+    {
+        "_id" : "77782530-af92-11ea-84a5-375d38ce727a",
+        "node" : "Node4",
+        "timer1" : "00,00",
+        "timer2" : "00,00",
+        "timer3" : "00,00",
+        "thresholdTemperature" : "00,00",
+        "thresholdHumidity" : "00,00",
+        "auto" : true,
+        "dew" : false,
+        "fan" : false,
+        "pump1" : false,
+        "pump2" : true,
+        "pump3" : false
+    },
+
+    {
+        "_id" : "75d8a600-af92-11ea-84a5-375d38ce727a",
+        "node" : "Node5",
+        "timer1" : "00,00",
+        "timer2" : "00,00",
+        "timer3" : "00,00",
+        "thresholdTemperature" : "00,00",
+        "thresholdHumidity" : "00,00",
+        "auto" : false,
+        "dew" : false,
+        "fan" : false,
+        "pump1" : false,
+        "pump2" : false,
+        "pump3" : true
+    }
+]
