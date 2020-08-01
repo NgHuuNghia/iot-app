@@ -10,7 +10,7 @@ const Stack = createStackNavigator()
 
 const {Navigator, Screen} = Stack
 
-export default function ManamentStack(props) {
+export default function ManamentStack(props, navigation) {
 	return (
 		<Navigator initialRouteName={'Node1'} >
 			<Screen

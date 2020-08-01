@@ -1,34 +1,25 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Text, StyleSheet, View, TextInput, Image } from 'react-native'
 import { createStyles, maxWidth } from 'react-native-media-queries';
-import dataNode from './data/data.json'
 
-export default function ThongTin({node}) {
-  var check = 0;
-  dataNode.map((data, index) => {
-    if(data.node === node) {
-      check = index;
-    }
-  })
-      const [timer1, setTimer1] = useState(dataNode[check].timer1)
-      const [timer2, setTimer2] = useState(dataNode[check].timer2)
-      const [timer3, setTimer3] = useState(dataNode[check].timer3)
-      const [temperature, setTemperature] = useState(dataNode[check].thresholdTemperature)
-      const [humidity, setHumidity] = useState(dataNode[check].thresholdHumidity)
-      function onChangeTimer1(text1) {
-        setTimer1(text1)
-      }
-      function onChangeTimer2(text) {
-        setTimer2(text)
-      }
-      function onChangeTimer3(text) {
-        setTimer3(text)
-      }
-      function onChangeTemperature(text) {
-        setTemperature(text)
-      }
-      function onChangeHumidity(text) {
-        setHumidity(text)
+export default function ThongTin({node, Clients}) {
+      const [timer1, setTimer1] = useState(null)
+      const [timer2, setTimer2] = useState(null)
+      const [timer3, setTimer3] = useState(null)
+      const [temperature, setTemperature] = useState(null)
+      const [humidity, setHumidity] = useState(null)
+      useEffect(() => {
+        setTimer1(node.timer1)
+        setTimer2(node.timer2)
+        setTimer3(node.timer3)
+        setTemperature(node.th_temp)
+        setHumidity(node.th_humi)
+    }, [node])
+      function submitData() {
+        Clients.write(JSON.stringify(
+            {"id_device":node.id_device,"timer1":timer1,"timer2":timer2,"timer3":timer3,"th_temp":temperature,"th_humi":humidity,"req_device":"106"}
+        ));
+        setTimeout(()=>{Clients.write(JSON.stringify({id_device: node.id_device, req_device: '109'}))}, 5000);
       }
   return(
       <View style = {styles.sc1}>
@@ -39,13 +30,14 @@ export default function ThongTin({node}) {
           />
           <Text style= {{paddingTop: 16, paddingRight: 100, fontSize: 13}}> Timer 1:</Text>
           <TextInput
-                  placeholder='00,00'
+                  placeholder='0000'
                   underlineColorAndroid='transparent'
                   style={styles1.input}
                   keyboardType={'numeric'}
-                  maxLength = {5}
+                  maxLength = {4}
                   value= {timer1}
-                  onChangeText= {(text1) => { onChangeTimer1(text1)}}
+                  onChangeText={(text) => { setTimer1(text) }}
+                  onSubmitEditing={() => submitData()}
           />
           <Text style= {styles1.text}>phút</Text>
       </View>
@@ -56,13 +48,14 @@ export default function ThongTin({node}) {
           />
           <Text style= {{paddingTop: 16, paddingRight: 100, fontSize: 13}}> Timer 2:</Text>
           <TextInput
-                  placeholder="00,00"
+                  placeholder="0000"
                   underlineColorAndroid='transparent'
                   style={styles1.input}
                   keyboardType={'numeric'}
-                  maxLength = {5}
+                  maxLength = {4}
                   value= {timer2}
-                  onChangeText= {(text2) => { onChangeTimer2(text2)}}
+                  onChangeText={(text) => { setTimer2(text) }}
+                  onSubmitEditing={() => submitData()}
           />
           <Text style= {styles1.text}>phút</Text>
       </View>
@@ -73,13 +66,14 @@ export default function ThongTin({node}) {
           />
           <Text style= {{paddingTop: 16, paddingRight: 100, fontSize: 13}}> Timer 3:</Text>
           <TextInput
-                  placeholder="00,00"
+                  placeholder="0000"
                   underlineColorAndroid='transparent'
                   style={styles1.input}
                   keyboardType={'numeric'}
-                  maxLength = {5}
+                  maxLength = {4}
                   value= {timer3}
-                  onChangeText= {(text3) => { onChangeTimer3(text3)}}
+                  onChangeText={(text) => { setTimer3(text) }}
+                  onSubmitEditing={() => submitData()}
           />
           <Text style= {styles1.text}>phút</Text>
       </View>
@@ -96,7 +90,8 @@ export default function ThongTin({node}) {
                   keyboardType={'numeric'}
                   maxLength = {5}
                   value= {temperature}
-                  onChangeText= {(text4) => { onChangeTemperature(text4)}}
+                  onChangeText={(text) => { setTemperature(text) }}
+                  onSubmitEditing={() => submitData()}
           />
           <Text style= {styles1.text}>°C</Text>
       </View>
@@ -113,7 +108,8 @@ export default function ThongTin({node}) {
                   keyboardType={'numeric'}
                   maxLength = {5}
                   value= {humidity}
-                  onChangeText= {(text5) => { onChangeHumidity(text5)}}
+                  onChangeText={(text) => { setHumidity(text) }}
+                  onSubmitEditing={() => submitData()}
           />
           <Text style= {styles1.text}>%</Text>
       </View>
@@ -161,7 +157,8 @@ const styles = StyleSheet.create({
               height: 40,
           },
           input: {
-              height: 30
+              height: 35,
+              paddingBottom: 0
           },
           text: {
               paddingTop: 14

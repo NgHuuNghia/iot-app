@@ -3,7 +3,7 @@ import { Text, StyleSheet, View, Image } from 'react-native'
 import { createStyles, maxWidth } from 'react-native-media-queries';
 
 
-export default function ThongKe() {
+export default function ThongKe({node}) {
   return(
     <View style= {styles.sc1}>
             <View style={styles.op1}>
@@ -11,13 +11,13 @@ export default function ThongKe() {
                     source={require('../assets/op1/nhietdo.png')}
                     style={styles1.logo}
                 />
-                <Text style= {{paddingTop: 15, paddingRight: 12, fontSize: 13}}>Temperature: 00,00 °C</Text>
+                <Text style= {{paddingTop: 15, paddingRight: 12, fontSize: 13}}>Temperature: {node.temp} °C</Text>
                 <Image
                     source={require('../assets/op1/dat.png')}
                     style={styles1.logo}
                 />
                 <Text style= {{paddingTop: 15, fontSize: 13, paddingRight: 25}}>Soil:</Text>
-                <Text style= {{paddingTop: 16, fontSize: 13}}>00,00 %</Text>
+                <Text style= {{paddingTop: 16, fontSize: 13}}>{node.soil} %</Text>
             </View>
             <View style={styles.op1}>
                 <Image
@@ -25,13 +25,13 @@ export default function ThongKe() {
                     style={styles1.logo}
                 />
                 <Text style= {{paddingTop: 15, paddingRight: 25, fontSize: 13}}>Humidity:</Text>
-                <Text style= {{paddingTop: 16, fontSize: 13, paddingRight: 14}}>00,00 %</Text>
+                <Text style= {{paddingTop: 16, fontSize: 13, paddingRight: 14}}>{node.humi} %</Text>
                 <Image
                     source={require('../assets/op1/air.png')}
                     style={styles1.logo}
                 />
                 <Text style= {{paddingTop: 15, fontSize: 13, paddingRight: 25}}>  Air:</Text>
-                <Text style= {{paddingTop: 16, fontSize: 13}}>00,00 %</Text>
+                <Text style= {{paddingTop: 16, fontSize: 13}}>{node.air} %</Text>
             </View>
         </View>
   )

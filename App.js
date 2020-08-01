@@ -6,7 +6,8 @@ import SocketIO from './Socket/socket';
 function App() {
   return (
     <NavigationContainer>
-      <SocketIO />
+      {/* /*<SocketIO /> */}
+      <AppNavigator />
     </NavigationContainer>
   );
 }

@@ -1,65 +1,86 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {Text, StyleSheet, View, Switch, Image, TouchableOpacity} from 'react-native'
 import { createStyles, maxWidth } from 'react-native-media-queries';
-import dataNode from './data/data.json'
 
 
-export default function Auto({node}) {
-  var check = 0;
-  dataNode.map((data, index) => {
-    if(data.node === node) {
-      check = index;
-    }
-  })
-    const [isEnabled, setIsEnabled] = useState(dataNode[check].auto)
-    const [pump1, setPump1] = useState(dataNode[check].pump1)
-    const [pump2, setPump2] = useState(dataNode[check].pump2)
-    const [pump3, setPump3] = useState(dataNode[check].pump3)
-    const [dew, setDew] = useState(dataNode[check].dew)
-    const [fan, setFan] = useState(dataNode[check].fan)
+export default function Auto({node, Clients}) {
+    const [isEnabled, setIsEnabled] = useState(null)
+    const [pump1, setPump1] = useState(null)
+    const [pump2, setPump2] = useState(null)
+    const [pump3, setPump3] = useState(null)
+    const [dew, setDew] = useState(null)
+    const [fan, setFan] = useState(null)
+    useEffect(() => {
+      setIsEnabled(+node.mode)
+      setPump1(+node.ctrl1)
+      setPump2(+node.ctrl2)
+      setPump3(+node.ctrl3)
+      setDew(+node.ctrl4)
+      setFan(+node.ctrl5)
+  }, [node])
     function onClickPump1() {
       if(isEnabled)
         {
-          setPump1(!pump1)
-          //const  data =  dataNode.map( node => node.node === check ? {...node, pump1: !pump1} : node)
-          var path = fs.DocumentDirectoryPath + '../textfile.txt';
- 
-          // write the file
-          fs.writeFile(path, 'Lorem ipsum dolor sit amet', 'utf8')
-            .then((success) => {
-              console.log('FILE WRITTEN!');
-            })
-            .catch((err) => {
-              console.log(err.message);
-            });
+          const rs = +!pump1;
+          setPump1(rs)
+          Clients.write(JSON.stringify(
+            {"id_device":node.id_device,"ctrl1":rs,"ctrl2":pump2,"ctrl3":pump3,"ctrl4":dew,"ctrl5":fan,"req_device":"104"}
+          ));
+          setTimeout(()=>{Clients.write(JSON.stringify({id_device: node.id_device, req_device: '109'}))}, 5000);
         }
     }
     function onClickPump2() {
       if(isEnabled)
       {
-        setPump2(!pump2)
+        const rs = +!pump2;
+        setPump2(rs)
+        Clients.write(JSON.stringify(
+          {"id_device":node.id_device,"ctrl1":pump1,"ctrl2":rs,"ctrl3":pump3,"ctrl4":dew,"ctrl5":fan,"req_device":"104"}
+        ));
+        setTimeout(()=>{Clients.write(JSON.stringify({id_device: node.id_device, req_device: '109'}))}, 5000);
       }
     }
     function onClickPump3() {
       if(isEnabled)
       {
-        setPump3(!pump3)
+        const rs = +!pump3;
+        setPump3(rs)
+        Clients.write(JSON.stringify(
+          {"id_device":node.id_device,"ctrl1":pump1,"ctrl2":pump2,"ctrl3":rs,"ctrl4":dew,"ctrl5":fan,"req_device":"104"}
+        ));
+        setTimeout(()=>{Clients.write(JSON.stringify({id_device: node.id_device, req_device: '109'}))}, 5000);
       }
     }
     function onClickFan() {
       if(isEnabled)
       {
-        setFan(!fan)
+        const rs = +!fan
+        setFan(rs)
+        Clients.write(JSON.stringify(
+          {"id_device":node.id_device,"ctrl1":pump1,"ctrl2":pump2,"ctrl3":pump3,"ctrl4":dew,"ctrl5":rs,"req_device":"104"}
+        ));
+        setTimeout(()=>{Clients.write(JSON.stringify({id_device: node.id_device, req_device: '109'}))}, 5000);
       }
     }
     function onClickDew() {
       if(isEnabled)
       {
-        setDew(!dew)
+        const rs= +!dew
+        setDew(rs)
+        Clients.write(JSON.stringify(
+          {"id_device":node.id_device,"ctrl1":pump1,"ctrl2":pump2,"ctrl3":pump3,"ctrl4":rs,"ctrl5":fan,"req_device":"104"}
+        ));
+        setTimeout(()=>{Clients.write(JSON.stringify({id_device: node.id_device, req_device: '109'}))}, 5000);
       }
     }
     const toggleSwitch = () => {
-      setIsEnabled(previousState => !previousState);
+      const rs = (previousState => !previousState)
+      setIsEnabled(rs);
+      const rs1 = +!isEnabled;
+      Clients.write(JSON.stringify(
+        {"id_device":node.id_device,"mode":rs1,"req_device":"108"}
+      ));
+      setTimeout(()=>{Clients.write(JSON.stringify({id_device: node.id_device, req_device: '109'}))}, 5000);
     }
     return(
       <View style= {styles.sc1}>
@@ -74,7 +95,7 @@ export default function Auto({node}) {
                 thumbColor={isEnabled ? "#81b0ff" : "#f4f3f4"}
                 ios_backgroundColor="#3e3e3e"
                 onValueChange={toggleSwitch}
-                value={isEnabled}
+                value={isEnabled ? true : false}
                 style= {styles1.sw}
             />
           </View>

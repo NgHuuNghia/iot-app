@@ -1,15 +1,16 @@
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
-import Node1 from '../routes/Node1'
-import Node2 from '../routes/Node2'
-import Node3 from '../routes/Node3'
-import Node4 from '../routes/Node4'
-import Node5 from '../routes/Node5'
+import Node1 from '../screen/Node/Node1'
+import Node2 from '../screen/Node/Node2'
+import Node3 from '../screen/Node/Node3'
+import Node4 from '../screen/Node/Node4'
+import Node5 from '../screen/Node/Node5'
 
 const Tab = createBottomTabNavigator()
 
 export default function BottomTabNavigator (props) {
+  //const Clients = net.connect({port: 3333, host: '192.168.1.17'});
   return (
     <Tab.Navigator
       initialRouteName={'Node1'}
@@ -25,7 +26,7 @@ export default function BottomTabNavigator (props) {
             <FontAwesome5 name={'home'} color={'black'} size={size} />
           )
         }}
-        children={() => <Node1 {...props} title="Node1"/>}
+        component={Node1}
       />
       <Tab.Screen
         name='Node2'
@@ -34,7 +35,7 @@ export default function BottomTabNavigator (props) {
             <FontAwesome5 name={'home'} color={'black'} size={size} />
           )
         }}
-        children={() => <Node2 {...props} title="Node2" />}
+        component={Node2}
       />
       <Tab.Screen
         name='Node3'
@@ -43,7 +44,7 @@ export default function BottomTabNavigator (props) {
             <FontAwesome5 name={'home'} color={'black'} size={size} />
           )
         }}
-        children={() => <Node3 {...props} title="Node3" />}
+        component={Node3}
       />
       <Tab.Screen
         name='Node4'
@@ -53,7 +54,7 @@ export default function BottomTabNavigator (props) {
           )
         }}
         title="1"
-        children={() => <Node4 {...props} title="Node4"/>}
+        component={Node4}
       />
       <Tab.Screen
         name='Node5'
@@ -62,7 +63,7 @@ export default function BottomTabNavigator (props) {
             <FontAwesome5 name={'home'} color={'black'} size={size} />
           )
         }}
-        children={() => <Node5 {...props} title="Node5" />}
+        component={Node5}
       />
     </Tab.Navigator>
   )
