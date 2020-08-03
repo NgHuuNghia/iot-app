@@ -19,7 +19,7 @@ export default function Node2({navigation}) {
 	return (
 	<SafeAreaView style={styles.container}>
         <Header header='Node2' />
-        <View style= {{margin: 10}} >
+        <View>
           <StatusBar backgroundColor="#82FA58" barStyle = "dark-content" hidden = {false} translucent = {true} />
           <SocketIO node = "node2" Clients= {Clients}/>
         </View>

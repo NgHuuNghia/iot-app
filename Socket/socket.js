@@ -1,6 +1,5 @@
 import React, {useState, useEffect, useRef} from 'react';
-import {View, TextInput, StyleSheet, Text} from 'react-native';
-import net from 'react-native-tcp';
+import {View, StyleSheet, Image} from 'react-native';
 import DropdownAlert from 'react-native-dropdownalert';
 import Loading from '../components/Loading';
 import ThongTin from '../components/thongtin';
@@ -10,8 +9,6 @@ import {PORT, HOST} from '@env';
 
 function Socket({node, Clients}) {
   const dropdownAlertRef = useRef();
-  const [chat, setChat] = useState('');
-  const [clients, setClients] = useState(null);
   const [obj, setObj] = useState('');
   const [loading, setLoading] = useState(true);
   const [chats, setChats] = useState({
@@ -25,12 +22,6 @@ function Socket({node, Clients}) {
 
   console.log(node);
   useEffect(() => {
-    /*const Clients = net.connect({port: PORT, host: '192.168.1.17'}, () => {
-      console.log('connected to server!');
-      Clients.write(JSON.stringify({id_device: node, req_device: '109'}));
-      //dropdownAlertRef.current.alertWithType('success', 'Connected to server!');
-      // Clients.write('world!\r\n');
-    });*/
     Clients.on('data', (data) => {
       // console.log('GET DATA: ', data.toString());
       const data1 = JSON.parse(data.toString());
@@ -52,11 +43,14 @@ function Socket({node, Clients}) {
       Clients.end();
       // console.log('disconnected from server');
     });
-    setClients(Clients);
   }, []);
   console.log(node, obj.id_device);
   return loading || node != obj.id_device ? (
-    <Loading />
+    <View style={styles.container}>
+    <Image style={styles.image} source={{uri: 'https://media.giphy.com/media/feN0YJbVs0fwA/giphy.gif'}}>
+
+    </Image>
+    </View>
   ) : (
     <View style={styles.container}>
       <ThongKe node={obj}  />
@@ -68,8 +62,13 @@ function Socket({node, Clients}) {
 
 const styles = StyleSheet.create({
   container: {
-    margin: 5,
     height: '98%',
+    marginTop: 5
+  },
+  image: {
+    flex: 1,
+    resizeMode: "cover",
+    justifyContent: "center"
   },
 });
 

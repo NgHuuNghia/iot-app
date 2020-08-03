@@ -4,7 +4,7 @@ import {View, StyleSheet, Image} from 'react-native';
 export default function Loading() {
   return (
     <View style={styles.container}>
-      <Image style= {{ marginTop: 200 }} source={require('../assets/loading/image1.gif')} />
+      <Image style= {{ marginTop: 550 }} source={require('../assets/loading/image1.gif')} />
     </View>
   )
 }
