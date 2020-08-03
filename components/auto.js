@@ -24,7 +24,7 @@ export default function Auto({node, Clients}) {
           const rs = +!pump1;
           setPump1(rs)
           Clients.write(JSON.stringify(
-            {"id_device":node.id_device,"ctrl1":rs,"ctrl2":pump2,"ctrl3":pump3,"ctrl4":dew,"ctrl5":fan,"req_device":"104"}
+            {"id_device":node.id_device,"ctrl1":rs.toString(),"ctrl2":pump2.toString(),"ctrl3":pump3.toString(),"ctrl4":dew.toString(),"ctrl5":fan.toString(),"req_device":"104"}
           ));
           setTimeout(()=>{Clients.write(JSON.stringify({id_device: node.id_device, req_device: '109'}))}, 5000);
         }
@@ -35,7 +35,7 @@ export default function Auto({node, Clients}) {
         const rs = +!pump2;
         setPump2(rs)
         Clients.write(JSON.stringify(
-          {"id_device":node.id_device,"ctrl1":pump1,"ctrl2":rs,"ctrl3":pump3,"ctrl4":dew,"ctrl5":fan,"req_device":"104"}
+          {"id_device":node.id_device,"ctrl1":pump1.toString(),"ctrl2":rs.toString(),"ctrl3":pump3.toString(),"ctrl4":dew.toString(),"ctrl5":fan.toString(),"req_device":"104"}
         ));
         setTimeout(()=>{Clients.write(JSON.stringify({id_device: node.id_device, req_device: '109'}))}, 5000);
       }
@@ -46,7 +46,7 @@ export default function Auto({node, Clients}) {
         const rs = +!pump3;
         setPump3(rs)
         Clients.write(JSON.stringify(
-          {"id_device":node.id_device,"ctrl1":pump1,"ctrl2":pump2,"ctrl3":rs,"ctrl4":dew,"ctrl5":fan,"req_device":"104"}
+          {"id_device":node.id_device,"ctrl1":pump1.toString(),"ctrl2":pump2.toString(),"ctrl3":rs.toString(),"ctrl4":dew.toString(),"ctrl5":fan.toString(),"req_device":"104"}
         ));
         setTimeout(()=>{Clients.write(JSON.stringify({id_device: node.id_device, req_device: '109'}))}, 5000);
       }
@@ -57,7 +57,7 @@ export default function Auto({node, Clients}) {
         const rs = +!fan
         setFan(rs)
         Clients.write(JSON.stringify(
-          {"id_device":node.id_device,"ctrl1":pump1,"ctrl2":pump2,"ctrl3":pump3,"ctrl4":dew,"ctrl5":rs,"req_device":"104"}
+          {"id_device":node.id_device,"ctrl1":pump1.toString(),"ctrl2":pump2.toString(),"ctrl3":pump3.toString(),"ctrl4":dew.toString(),"ctrl5":rs.toString(),"req_device":"104"}
         ));
         setTimeout(()=>{Clients.write(JSON.stringify({id_device: node.id_device, req_device: '109'}))}, 5000);
       }
@@ -68,7 +68,7 @@ export default function Auto({node, Clients}) {
         const rs= +!dew
         setDew(rs)
         Clients.write(JSON.stringify(
-          {"id_device":node.id_device,"ctrl1":pump1,"ctrl2":pump2,"ctrl3":pump3,"ctrl4":rs,"ctrl5":fan,"req_device":"104"}
+          {"id_device":node.id_device,"ctrl1":pump1.toString(),"ctrl2":pump2.toString(),"ctrl3":pump3.toString(),"ctrl4":rs.toString(),"ctrl5":fan.toString(),"req_device":"104"}
         ));
         setTimeout(()=>{Clients.write(JSON.stringify({id_device: node.id_device, req_device: '109'}))}, 5000);
       }
@@ -78,7 +78,7 @@ export default function Auto({node, Clients}) {
       setIsEnabled(rs);
       const rs1 = +!isEnabled;
       Clients.write(JSON.stringify(
-        {"id_device":node.id_device,"mode":rs1,"req_device":"108"}
+        {"id_device":node.id_device,"mode":rs1.toString(),"req_device":"108"}
       ));
       setTimeout(()=>{Clients.write(JSON.stringify({id_device: node.id_device, req_device: '109'}))}, 5000);
     }
@@ -100,7 +100,7 @@ export default function Auto({node, Clients}) {
             />
           </View>
           <View style = {styles.op3}>
-            <View style = {styles.op6}>
+            <View style = {styles1.op6}>
               <View style = {styles.op4}>
                 <Image
                   source={require('../assets/auto/3nuoc.png')}
@@ -112,7 +112,7 @@ export default function Auto({node, Clients}) {
               </View>
               <Text >Dew</Text>
             </View >
-            <View style = {styles.op6}>
+            <View style = {styles1.op6}>
               <View style = {styles.op4}>
               <Image
                 source={require('../assets/auto/quat.png')}
@@ -186,17 +186,6 @@ const styles = StyleSheet.create({
       flexDirection: 'row',
       textAlign: 'center',
     },
-    op6: {
-      alignItems: 'center',
-      width: 90,
-      borderWidth: 2,
-      borderRadius: 10,
-      borderColor: '#0040FF',
-      textAlign: 'center',
-      marginLeft: 50, 
-      marginTop: 2,
-      marginBottom: 10
-    }
 })
 const base = {
   logo: {
@@ -207,7 +196,7 @@ const base = {
     paddingTop: 18
   },
   sw: {
-    paddingRight: 150, 
+    paddingRight: 150,
     paddingTop: 25
   },
   radiobtn: {
@@ -235,13 +224,24 @@ const base = {
     flexDirection: 'row',
     textAlign: 'center',
   },
+  op6: {
+    alignItems: 'center',
+    width: 90,
+    borderWidth: 2,
+    borderRadius: 10,
+    borderColor: '#0040FF',
+    textAlign: 'center',
+    marginLeft: 62,
+    marginTop: 2,
+    marginBottom: 10
+  },
   op7: {
     alignItems: 'center',
     width: 90,
     borderWidth: 2,
     borderRadius: 10,
     borderColor: '#0040FF',
-    marginLeft: 15,
+    marginLeft: 25,
     marginTop: 5,
     marginBottom: 5
   }
@@ -257,11 +257,17 @@ const styles1 = createStyles(
         paddingTop: 10
       },
       sw: {
-        paddingRight: 140, 
+        paddingRight: 140,
         paddingTop: 15
       },
       op5: {
         marginLeft: 17,
+      },
+      op6: {
+        marginLeft: 40,
+      },
+      op7: {
+        marginLeft: 15,
       }
   })
 )

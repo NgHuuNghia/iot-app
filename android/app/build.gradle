@@ -135,6 +135,14 @@ android {
         versionCode 1
         versionName "1.0"
     }
+    signingConfigs {
+    release {
+        storeFile file(MY_AWESOME_PROJECT_RELEASE_STORE_FILE)
+        storePassword MY_AWESOME_PROJECT_RELEASE_STORE_PASSWORD
+        keyAlias MY_AWESOME_PROJECT_RELEASE_KEY_ALIAS
+        keyPassword MY_AWESOME_PROJECT_RELEASE_KEY_PASSWORD
+    }
+    }
     splits {
         abi {
             reset()
@@ -161,6 +169,7 @@ android {
             signingConfig signingConfigs.debug
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+            signingConfig signingConfigs.release
         }
     }
 
@@ -185,7 +194,9 @@ dependencies {
     //noinspection GradleDynamicVersion
     implementation "com.facebook.react:react-native:+"  // From node_modules
 
-    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
+    implementation 'com.facebook.fresco:fresco:2.0.0'
+
+    implementation 'com.facebook.fresco:animated-gif:2.0.0'   //use
 
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}") {
       exclude group:'com.facebook.fbjni'

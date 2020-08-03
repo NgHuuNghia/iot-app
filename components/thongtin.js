@@ -17,7 +17,7 @@ export default function ThongTin({node, Clients}) {
     }, [node])
       function submitData() {
         Clients.write(JSON.stringify(
-            {"id_device":node.id_device,"timer1":timer1,"timer2":timer2,"timer3":timer3,"th_temp":temperature,"th_humi":humidity,"req_device":"106"}
+            {"id_device":node.id_device,"timer1":timer1.toString(),"timer2":timer2.toString(),"timer3":timer3.toString(),"th_temp":temperature.toString(),"th_humi":humidity.toString(),"req_device":"106"}
         ));
         setTimeout(()=>{Clients.write(JSON.stringify({id_device: node.id_device, req_device: '109'}))}, 5000);
       }
